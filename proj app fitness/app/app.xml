@@ -1,0 +1,7 @@
+package fitnesstracker.com
+
+import android.app.Application
+
+class FitnessTrackerApp : Application() {
+    lateinit var mainActivity: MainActivity
+}

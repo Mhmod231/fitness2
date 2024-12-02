@@ -1,0 +1,28 @@
+package fitnesstracker.com
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+
+class LogWorkoutActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_log_workout)
+
+        val editTextWorkoutType: EditText = findViewById(R.id.editTextWorkoutType)
+        val editTextDuration: EditText = findViewById(R.id.editTextDuration)
+        val editTextCalories: EditText = findViewById(R.id.editTextCalories)
+
+        val buttonSave: Button = findViewById(R.id.buttonSave)
+        buttonSave.setOnClickListener {
+            val workoutType = editTextWorkoutType.text.toString()
+            val duration = editTextDuration.text.toString().toIntOrNull() ?: 0
+            val calories = editTextCalories.text.toString().toIntOrNull() ?: 0
+
+            val workout = Workout(workoutType, duration, calories)
+            (application as FitnessTrackerApp).mainActivity.addWorkout(workout)
+            finish()
+        }
+    }
+}

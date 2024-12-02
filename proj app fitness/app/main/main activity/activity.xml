@@ -1,0 +1,35 @@
+
+package fitnesstracker.com
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var workoutAdapter: WorkoutAdapter
+    private val workoutList: MutableList<Workout> = mutableListOf()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        recyclerView = findViewById(R.id.recyclerView)
+        workoutAdapter = WorkoutAdapter(workoutList)
+        recyclerView.adapter = workoutAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val buttonLogWorkout: Button = findViewById(R.id.buttonLogWorkout)
+        buttonLogWorkout.setOnClickListener {
+            startActivity(Intent(this, LogWorkoutActivity::class.java))
+        }
+    }
+
+    fun addWorkout(workout: Workout) {
+        workoutList.add(workout)
+        workoutAdapter.notifyDataSetChanged()
+    }
+}

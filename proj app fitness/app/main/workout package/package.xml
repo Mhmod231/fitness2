@@ -1,0 +1,7 @@
+package fitnesstracker.com
+
+data class Workout(
+    val type: String,
+    val duration: Int,
+    val calories: Int
+)
